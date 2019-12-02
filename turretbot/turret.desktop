@@ -1,0 +1,12 @@
+# This file must be placed in /usr/share/applications
+# It provides the Desktop shortcut to launch the Turret Controller
+
+[Desktop Entry]
+Name=Interbotix Turret
+Comment=ROS - Turret Control
+Exec="/home/turretbot/interbotix_ws/src/interbotix_ros_arms_pi/turretbot/start_turretbot.sh"
+Icon=/home/turretbot/interbotix_ws/src/interbotix_ros_arms_pi/turretbot/turret.png
+Terminal=false
+Type=Application
+Categories=ROS;
+StartupNotify=true

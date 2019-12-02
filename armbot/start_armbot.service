@@ -1,0 +1,15 @@
+# This service is used to auto-launch the joy_control.launch
+# file when the Raspberry Pi 3B+ is turned on.
+# It calls the bash script 'start_armbot.sh' at boot.
+# Make sure to place this file in /lib/systemd/system.
+# Then type 'sudo systemctl daemon-reload' followed by 'sudo systemctl enable start_armbot.service'.
+
+[Unit]
+Description=Start Joystick Control on Armbot
+
+[Service]
+ExecStart=/home/armbot/interbotix_ws/src/interbotix_ros_arms_pi/armbot/start_armbot.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

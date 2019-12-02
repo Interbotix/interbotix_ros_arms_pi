@@ -1,0 +1,17 @@
+# This service is used to auto-launch the turret_control.launch
+# file when the Raspberry Pi 3B+ is turned on.
+# It calls the bash script 'start_turretbot.sh' at boot.
+# Make sure to place this file in /lib/systemd/system.
+# Then type 'sudo systemctl daemon-reload' followed by 'sudo systemctl enable start_turretbot.service'.
+
+[Unit]
+Description=Start Turret Control on Turretbot
+
+[Service]
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=/home/turretbot/.Xauthority
+ExecStart=/home/turretbot/interbotix_ws/src/interbotix_ros_arms_pi/turretbot/start_turretbot.sh
+Restart=on-failure
+
+[Install]
+WantedBy=graphical.target

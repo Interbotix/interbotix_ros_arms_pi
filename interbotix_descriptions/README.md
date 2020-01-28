@@ -8,7 +8,7 @@ This package contains the URDFs and meshes for the many X-Series Interbotix arms
 This package contains the [description.launch](launch/description.launch) file responsible for loading parts or all of the robot model. It launches up to four nodes as described below:
 - **joint_state_publisher** - responsible for parsing the 'robot_description' parameter to find all non-fixed joints and publish a JointState message with those joints defined.
 - **robot_state_publisher** - uses the URDF specified by the parameter robot_description and the joint positions from the joint_states topic to calculate the forward kinematics of the robot and publish the results via tf.
-- **static_transform_publisher** - publishes a static transform from a 'world' frame to the 'base_link' frame of a robot.
+- **static_transform_publisher** - publishes a static transform from the 'world' frame to the 'base_link' frame of a robot.
 
 ## Usage
 To run this package, type the line below in a terminal. Note that the `robot_name` argument must be specified as the name of one of the URDF files located in the [urdf](/urdf) directory (excluding the '.urdf.xacro' part). For example, to launch the ReactorX 150 arm, type:
@@ -28,5 +28,5 @@ This is the bare minimum needed to get up and running. Take a look at the table 
 | use_external_gripper_urdf | if you have a URDF of a custom gripper attachment, set this to 'true' | false |
 | external_gripper_urdf_loc | set the file path to where your custom gripper attachment URDF is located | "" |
 | load_gazebo_material | set this to 'true' if Gazebo is being used; it makes sure to also load Gazebo related configs to the 'robot_description' parameter so that the robot models show up black in Gazebo | false |
-| load_moveit_world_frame | set this to 'true' if MoveIt is being used; it makes sure to also load a 'world' frame to the 'robot_description' parameter which is located exactly at the 'base_link' frame of the robot arm | false |
+| use_moveit | set this to 'true' if MoveIt is being used; it makes sure to also load a 'world' frame to the 'robot_description' parameter which is located exactly at the 'base_link' frame of the robot arm | false |
 | model | file path to the robot-specific URDF including arguments to be passed in | refer to [description.launch](launch/description.launch) |

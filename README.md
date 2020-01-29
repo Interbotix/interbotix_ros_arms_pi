@@ -23,8 +23,14 @@ To work with ROS, you should install Ubuntu Mate 18.04 on the Raspberry Pi follo
 - [Install Ubuntu MATE 18.04 on Raspberry Pi 3B+](https://roboticsbackend.com/install-ubuntu-mate-18-04-on-raspberry-pi-3-b/)
 - [Install ROS Melodic on Raspberry Pi 3](https://roboticsbackend.com/install-ros-on-raspberry-pi-3/)
 
-While not necessary, it could be helpful to create a Hotspot on the Pi so that you can connect to it from your own personal computer easily over SSH. The tutorial below does a great job of explaining how to do this. Afterwards, you should be ready to setup the hardware.
+While not necessary, it could be helpful to create a Hotspot on the Pi so that you can connect to it from your own personal computer easily over SSH. The tutorial below does a great job of explaining how to do this.
 - [How to Create WiFi Hotspot in Ubuntu 18.04 LTS Bionic Beaver](https://www.intrawebsolns.com/how-to-create-wifi-hotspot-in-ubuntu-18-04-lts-bionic-beaver-or-linux-mint-19-tara-android-is-supported/)
+
+Similarly, if you plan on using a monitor with the Pi, make sure to plug it in before turning on the computer. If you plug it in later, there's a good chance that the Pi will not detect it and you will not be able to see anything. Or, you can fix this issue by doing the following steps.
+- Open a terminal and type `sudo nano /boot/config.txt`
+- In the file that pops up, uncomment the line that says `#hdmi_force_hotplug=1`. What this will do is trick the Pi into thinking that an HDMI monitor is plugged in even if it's not.
+- Then scroll down and uncomment the line that says `hdmi_group=1`. This step tells the Pi to 'imagine' that it is connected to an HDMI monitor of the CEA (Consumer Electronics Association) variety.
+- Finally scroll down, uncomment the line that says `#hdmi_mode=1` and modify it to `hdmi_mode=16`. This tells the Pi to configure the imaginary monitor to have a resolution of 1920x1080 with a refresh rate of 60Hz. Now, if you plug in an actual monitor any point after boot, the Pi will detect it and configure it with the resolution above.
 
 ## Hardware Setup
 There is not much required to get the robot up and running as most of the setup is done for you. Just make sure to do the following steps:

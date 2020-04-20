@@ -4,12 +4,6 @@ project(interbotix_turret_control)
 ## Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++11)
 
-## Ignore diagnostic notes about ABI warnings. Refer to bullet point #5
-## under 'Caveats' at https://gcc.gnu.org/gcc-7/changes.html.
-## These notes appear since the Pi uses an ARM CPU, and Ubuntu Mate 18.04
-## by default uses GCC 7.4
-set( CMAKE_CXX_FLAGS "-Wno-psabi" )
-
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
@@ -75,7 +69,7 @@ add_dependencies(turret_control_joy_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${c
 
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
-install(PROGRAMS
+catkin_install_python(PROGRAMS
   scripts/turret_control
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )

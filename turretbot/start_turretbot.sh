@@ -18,5 +18,5 @@ then
 	roslaunch interbotix_turret_control turret_control.launch start_non_gui_nodes:=False
 else
 	echo "Launching..."
-	roslaunch interbotix_turret_control turret_control.launch
+	roslaunch interbotix_turret_control turret_control.launch use_default_rviz:=false
 fi

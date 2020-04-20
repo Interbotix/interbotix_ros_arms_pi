@@ -4,12 +4,6 @@ project(interbotix_sdk)
 ## Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++11)
 
-## Ignore diagnostic notes about ABI warnings. Refer to bullet point #5
-## under 'Caveats' at https://gcc.gnu.org/gcc-7/changes.html.
-## These notes appear since the Pi uses an ARM CPU, and Ubuntu Mate 18.04
-## by default uses GCC 7.4
-set( CMAKE_CXX_FLAGS "-Wno-psabi" )
-
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
@@ -29,6 +23,11 @@ find_package(catkin REQUIRED COMPONENTS
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
+
+## Uncomment this if the package has a setup.py. This macro ensures
+## modules and global scripts declared therein get installed
+## See http://ros.org/doc/api/catkin/html/user_guide/setup_dot_py.html
+catkin_python_setup()
 
 # Resolve system dependency on yaml-cpp, which apparently does not
 # provide a CMake find_package() module.

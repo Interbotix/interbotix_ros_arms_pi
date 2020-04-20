@@ -6,7 +6,7 @@ This package can be used to control the motion of any of the five [X-series turr
 Regarding naming conventions, there are three parts to a turret's name. The first two letters correspond to the robot model name. For example, the 'WidowX' platform is signified by 'wx'. The next two letters describe the type of motor used in the turret. There are only two choices available: 'xl' and 'xm'. Finally, the last letter signifies if the 'tilt' joint is composed of a single motor ('s') or dual motors ('d'). Thus, the 'PhantomX XL430 Robot Turret' can be abbreviated as 'pxxls'.
 
 ## Structure
-![turret_control_flowchart](images/interbotix_turret_control_flowchart_pi.png)
+![turret_control_flowchart](images/turret_control_flowchart.png)
 As shown above, the *interbotix_turret_control* package builds on top of the *interbotix_sdk* package. To get familiar with the nodes in the *interbotix_sdk* package, please look at its README. The other nodes are described below:
 - **joy** - a ROS driver for a generic Linux joystick; it reads data from a SONY PS3 or PS4 controller joystick over Bluetooth and publishes  [sensor_msgs/Joy](http://docs.ros.org/melodic/api/sensor_msgs/html/msg/Joy.html) messages to the `joy` topic
 - **turret_control_joy_node** - responsible for reading in raw [sensor_msgs/Joy](http://docs.ros.org/melodic/api/sensor_msgs/html/msg/Joy.html) messages from the `joy` topic and converting them into [TurretJoyControl](msg/TurretJoyControl.msg) messages; this makes the code more readable and allows users to remap buttons very easily later.
@@ -54,9 +54,11 @@ A red error message might appear in the screen saying `Couldn't open joystick fo
 | Argument | Description | Default Value |
 | -------- | ----------- | :-----------: |
 | robot_name | five character name of a turret | "" |
+| use_default_rviz | 'true' if Rviz should be displayed; 'false' otherwise | true |
 | threshold | value from 0 to 1 defining joystick sensitivity; a larger number means the joystick should be less sensitive | 0.75 |
 | controller | type of Playstation controller ('ps3' or 'ps4') | ps4 |
 | start_non_gui_nodes | 'true' if the 'non GUI nodes' should be launched; 'false' otherwise | true |
+| turret_run | 'true' if the *turret_run.launch* file should be launched - set to 'false' if you would like to run your own version of this file separately | true |
 
 After launching, a GUI should pop up similar to the one below. To become more familiar with the GUI and external joystick controls, please refer to the tutorial located [here](Turret_Control_Tutorial.pdf).
 

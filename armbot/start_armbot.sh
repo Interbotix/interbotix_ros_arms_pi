@@ -9,4 +9,4 @@
 
 source /opt/ros/melodic/setup.bash
 source /home/armbot/interbotix_ws/devel/setup.bash
-roslaunch interbotix_joy_control joy_control.launch
+roslaunch interbotix_joy_control joy_control.launch use_default_rviz:=false

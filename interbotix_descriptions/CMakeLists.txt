@@ -6,11 +6,17 @@ project(interbotix_descriptions)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   joint_state_publisher
+  joint_state_publisher_gui
   robot_state_publisher
   roslaunch
-  tf2_ros
+  rviz
   xacro
 )
+
+## Uncomment this if the package has a setup.py. This macro ensures
+## modules and global scripts declared therein get installed
+## See http://ros.org/doc/api/catkin/html/user_guide/setup_dot_py.html
+catkin_python_setup()
 
 ###################################
 ## catkin specific configuration ##
@@ -18,7 +24,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## The catkin_package macro generates cmake config files for your package
 ## Declare things to be passed to dependent projects
 catkin_package(
-  CATKIN_DEPENDS joint_state_publisher robot_state_publisher roslaunch tf2_ros xacro
+  CATKIN_DEPENDS joint_state_publisher joint_state_publisher_gui robot_state_publisher roslaunch rviz xacro
 )
 
 ###########

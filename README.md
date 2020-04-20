@@ -24,7 +24,7 @@ To work with ROS, you should install Ubuntu Mate 18.04 on the Raspberry Pi follo
 - [Install ROS Melodic on Raspberry Pi 3](https://roboticsbackend.com/install-ros-on-raspberry-pi-3/)
 
 While not necessary, it could be helpful to create a Hotspot on the Pi so that you can connect to it from your own personal computer easily over SSH. The tutorial below does a great job of explaining how to do this.
-- [How to Create WiFi Hotspot in Ubuntu 18.04 LTS Bionic Beaver](https://www.intrawebsolns.com/how-to-create-wifi-hotspot-in-ubuntu-18-04-lts-bionic-beaver-or-linux-mint-19-tara-android-is-supported/)
+- [How to Create Wi-Fi Hotspot in Ubuntu 18.04 / Gnome](https://www.linuxuprising.com/2018/09/how-to-create-wi-fi-hotspot-in-ubuntu.html)
 
 Similarly, if you plan on using a monitor with the Pi, make sure to plug it in before turning on the computer. If you plug it in later, there's a good chance that the Pi will not detect it and you will not be able to see anything. Or, you can fix this issue by doing the following steps.
 - Open a terminal and type `sudo nano /boot/config.txt`
@@ -72,10 +72,15 @@ $ sudo apt install python-pip
 $ sudo pip install modern_robotics
 ```
 
-6. Now that all the dependencies are installed, it's time to build! Since there is only 1 GB of memory on the Pi, only use two cores.
+6. Now that all the dependencies are installed, it's time to build! Since there is only 1 GB of memory on the Pi, only use two cores. Also, make sure to disable diagnostic notes about ABI warnings as explained in bullet point #5 under *Caveats* [here](https://gcc.gnu.org/gcc-7/changes.html) (the RPI 3B+ has ARM based processors and Ubuntu Mate by default uses GCC 7).
 ```
 $ cd ~/interbotix_ws
-$ catkin_make -j2
+$ catkin_make -j2 -DCMAKE_CXX_FLAGS="-Wno-psabi"
+```
+
+Note that if the terminal freezes up during compilation (for more than 30 seconds), lower the number of cores to 1 as shown below.
+```
+$ catkin_make -j1 -DCMAKE_CXX_FLAGS="-Wno-psabi"
 ```
 
 7. Copy over the udev rules to the right directory. The rules create a symlink for the port to which the U2D2 is connected. This ensures that the Pi always 'recognizes' the U2D2. It also reduces USB latency to 1 ms so that there is minimal lag during communication. Afterwards, reload and trigger the updated udev rules.
@@ -106,7 +111,9 @@ Now if you navigate to the Menu icon on the top-left of the Pi's Desktop and typ
 
 11. Complete the **PS4 Controller Setup** and **Specify Robot Arm/Turret Type** sections located [here](armbot/Robot%20Arm%20Quickstart.pdf) if controlling a Robot Arm or [here](turretbot/Turret%20Quickstart.pdf) if controlling a Turret. These sections should help you pair a PS4 controller to the Pi via Bluetooth and let the ROS nodes 'know' which specific robot you will be controlling. At the end, don't forget to restart the Pi!
 
-12. Finally, to get familiar with the joystick button mappings and/or the Turret Control GUI, navigate to the [armbot](armbot/) or [turretbot](turretbot/) directories and look through the Quickstart and/or Tutorial guides.
+12. To get familiar with the joystick button mappings and/or the Turret Control GUI, navigate to the [armbot](armbot/) or [turretbot](turretbot/) directories and look through the Quickstart and/or Tutorial guides.
+
+13. If you just want to control the platform without a controller, you can do that as well! Either create your own custom ROS package or head over to the [python_demos](python_demos/) folder to get started!
 
 ## Contributors
 - [Matt Trossen](https://www.trossenrobotics.com/) - **Project Lead**

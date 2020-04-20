@@ -206,10 +206,12 @@ private:
     MultiPID pid_cntlrs;                                        // Object that contains the controllers for the arm joints - used to better track goal positions when doing trajectory control
     std::vector<double> home_positions;                         // Vector of home positions for the 'arm' related joints - this is just a '0' vector with 'joint_num_write' length
     std::vector<double> sleep_positions;                        // Vector of sleep positions for the 'arm' related joints - defined in the 'sleep' sequence in a motor config file
-    std::vector<Motor> arm_joints;                              // Vector of all arm joint names (including  gripper) and their corresponding Dynamixel IDs; shadow and 'single' motors are not included
     std::vector<Motor> arm_motors;                              // Vector of all arm motor names (as specified by the 'order' sequence in the config file) and their corresponding IDs (includes shadow motors but excludeds 'single' motors)
-    std::vector<Motor> all_joints;                              // Vector of all joint names (including gripper and 'single' joints) and their corresponding IDs (not including shadow motors)
+    std::vector<Motor> arm_joints;                              // Vector of all arm joint names (including  gripper) and their corresponding Dynamixel IDs; shadow and 'single' motors are not included
     std::vector<Motor> all_motors;                              // Vector of all motor names (including gripper, shadow motors, and 'single' joints) and their corresponding IDs
+    std::vector<Motor> all_joints;                              // Vector of all joint names (including gripper and 'single' joints) and their corresponding IDs (not including shadow motors)
+    std::map<uint8_t, std::vector<uint8_t>> shadow_map;         // Maps all the shadow motors to their master - for simplification, the master is included in the shadow vector as well
+    std::map<std::string, uint8_t> motor_map;                   // Maps all motor names (including gripper, shadow motors, and 'single' joints) to their corresponding IDs
     std::map<std::string, JointMode> joint_map;                 // Maps all joint names (including gripper and 'single' joints) to their Dynamixel IDs and operating modes
     uint8_t *joint_ids_read;                                    // Pointer to first element in a dynamic array of joint IDs (as specified in the 'arm_joints' vector above) to read joint states
     uint8_t *joint_ids_write;                                   // Pointer to first element in a dynamic array of joint IDs (as specified in the 'arm_joints' vector above - excluding gripper) to write joint commands
@@ -225,8 +227,8 @@ private:
     double gripper_max_effort;                                  // Max allowable gripper effort in mA before the gripper MoveIt trajectory is preempted
     double gripper_start_time;                                  // ROS start time for the gripper trajectory
     bool execute_gripper_traj;                                  // True if the gripper trajectory should be executed - False otherwise
-    bool default_gripper_bar;                                   // True if the gripper_bar_link in the URDF was loaded - False otherwise
-    bool default_gripper_fingers;                               // True if the gripper fingers in the URDF were loaded - False otherwise
+    bool use_default_gripper_bar;                               // True if the gripper_bar_link in the URDF was loaded - False otherwise
+    bool use_default_gripper_fingers;                           // True if the gripper fingers in the URDF were loaded - False otherwise
     bool use_gripper;                                           // True if the 'gripper' motor exists in the motor config file - False otherwise
 
     /// @brief Initializes the port to talk to the Dynamixel motors
